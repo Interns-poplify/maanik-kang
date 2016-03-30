@@ -1,0 +1,97 @@
+ <div class="content">
+ <div><!--top -->
+ 	<div class="row ">
+<div class="font_size col-md-12 "><%=@article.title%></div>
+
+</div>
+
+<div>  <span class="tagged-under">Tagged</span>
+  <% @article.tags.each do |tag| %>
+    <span class="black_box "><%= link_to tag.name ,tagged_path(tag.id) ,class: "bl" %></span>
+<%end%>
+</div>
+
+ <div class="row mbt">
+     <div class="col-md-1  col-xs-2 pics" style="background-image: url(<%=@article.user.image.url(:thumb)%>)"></div>
+     <div class="col-md-1 col-xs-3 wid pdtb-10 "><span class="italic">by</span> <span class="spec"><%=link_to @article.user.name,profile_path(@article.user.id) ,class: "blc"%></span></div>
+     <div class="col-md-1 col-xs-2 wideye pdtb-10" style="padding-left:6px"><i class="fa fa-eye "></i> <span class="eye"><%=@article.view_count%></span></div>
+    <div class="col-md-2 col-xs-4 pdtb-10 " style="padding-left:2px"><span class="fz-15"><%=@article.created_at.strftime("%d %b. %Y")%></span></div>
+   </div>
+ 
+   </div><!--top -->
+   <div class="mtopsb">
+   	<div class="row">
+   	<div class="col-md-8 col-xs-12">
+   		<div class="backs" style="background-image: url(<%=@article.photo.url(:large)%>)"></div>
+   		<div class="texts">
+   		<%l=@article.body.length%>
+   			<p class="fzs"><span class="drop-caps  nom drop-caps-borderless"><%=@article.body.first%></span>
+            <%=@article.body[1,l]%>
+   			</p>
+   		</div>
+   		<div>
+   			<div class=" margin-top-40">
+			<div class="row">
+				<div class="col-md-8 col-xs-12">
+
+					<h3>Comments</h3>
+					<div class="comments">
+					<%if user_signed_in?%>
+                    <%= render partial: 'comments/form' %>
+                    <%end%>
+					<%= render partial: 'articles/comment', collection: @article.comments %>
+
+                    </div>
+				</div><!--.col-->
+			</div><!--.row-->
+		</div><!--.full-content-->
+   		</div>
+   	</div>
+   	<div class="col-md-3 col-md-offset-1 col-xs-12">
+   	     <div class="text-center pop">POPULAR POSTS</div>
+   		<div class="row masonry">
+   		<%@articles.each do |article|%>
+   		<%if article.id != @article.id%>
+   		<div class="col-md-12 col-xs-6">
+   		<div class="card card-event">
+          <div class="card-heading bg-image" style="background-image:url(<%= article.photo.url(:medium)%>); background-position: center;background-repeat: no-repeat;background-size: cover;">
+          </div><!--.card-heading-->
+
+          <div class="card-body">
+            <div class="calendar calenderb clen">
+              <div class="month monthb"><%=article.created_at.strftime("%B")%></div>
+              <div class="date dateb dlen"><%=article.created_at.strftime("%d")%></div>
+            </div><!--.calendar-->
+            <%= link_to article.title,article_path(article),class: "bl bs sb"%>
+            <p style="font-size:15px"><%=(article.body).truncate(50)%><%=link_to "read more",article_path(article)%></p>
+          </div><!--.card-body-->
+
+          <div class="card-footer padin" >
+            <ul class="users pull-left">
+            <li><a href="#" data-toggle="tooltip" data-placement="top" data-original-title="<%=article.user.name%>"><%=link_to image_tag(article.user.image.url(:thumb)),profile_path(article.user.id)%></a></li>
+            <li style="font-size:13px"><%= link_to article.user.name,profile_path(article.user.id),class: "bs bl"%></li>
+            </ul>
+            
+          </div>
+        </div><!--.card-->
+        </div>
+        <%end%>
+        <%end%>
+        </div>
+   	</div>	
+   	</div>
+   </div>
+
+ </div>
+
+
+
+ 
+		
+
+
+<!-- <div class="col-md-1 col-xs-2 text-center pics" style="background-image: url(<%=@article.user.image.url(:thumb)%>)">
+  </div>
+  <div class="col-md-1  mids name"><span class="italic">by</span> <span class="spec"><%=link_to @article.user.name,profile_path(@article.user.id)%></span></div>
+  <div class="col-md-1 col-xs-2 pos mids" style="padding-left:5px"><i class="fa fa-eye "></i> <span class="eye"><%=@article.view_count%></span></div>
+  <div class="col-md-2 col-xs-4 mids date"><%=@article.created_at.strftime("%d %b. %Y")%></div> -->

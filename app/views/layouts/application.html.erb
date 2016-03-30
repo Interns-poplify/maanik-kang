@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Myblog</title>
+  <%if user_signed_in?%>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%else%>
+  <%= stylesheet_link_tag 'landingpage' ,media: 'all'%>
+  <%end%>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+   <!-- <script src="http://maps.google.com/maps/api/js?sensor=true&amp;libraries=places"></script> -->
+</head>
+
+<body class="<%if current_page?(new_user_registration_path)%>bg-login<%end%> <%unless user_signed_in?%> one-page<%end%>">
+<%if current_page?(new_user_registration_path)%>
+<%elsif user_signed_in?%>
+ <%= render 'shared/header' %>
+
+
+<%end%>
+ <%= render 'devise/sessions/new'%>
+ <%= render 'shared/signinout'%>
+<%= yield %>
+<%if user_signed_in?%>
+<%= javascript_include_tag 'pluggins' %>
+<%else%>
+<%= javascript_include_tag 'firstpluggins' %>
+<%end%>
+</body>
+<%if user_signed_in?%>
+<%= javascript_include_tag 'postyield' %>
+<%else%>
+<%= javascript_include_tag 'firstpostyield' %>
+<%end%>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+     var a = "<%=notice%>"
+       var x = a.length;
+       
+     if( x== 23){
+     	
+     	$("#signinalert").modal('show')
+     }
+     if( x== 24)
+     	$("#signoutalert").modal('show')
+     $("#signup").click(function(){
+     
+      $("#log_in").modal('hide');
+
+      
+     });
+ });
+</script>

@@ -1,0 +1,348 @@
+<%if user_signed_in?%>
+<div class="content">
+<div class="row">
+<%@articles.each do |article|%>
+      <div class="col-md-4">
+        <div class="card card-event">
+          <div class="card-heading bg-image" style="background-image:url(<%= article.photo.url(:medium)%>); background-position: center;background-repeat: no-repeat;background-size: cover;">
+          </div><!--.card-heading-->
+
+          <div class="card-body">
+            <div class="calendar calenderb clen">
+              <div class="month monthb"><%=article.created_at.strftime("%B")%></div>
+              <div class="date dateb dlen"><%=article.created_at.strftime("%d")%></div>
+            </div><!--.calendar-->
+            <%= link_to article.title,article_path(article),class: "bl bs sb"%>
+            <p style="font-size:15px"><%=(article.body).truncate(150)%><%=link_to "read more",article_path(article)%></p>
+          </div><!--.card-body-->
+
+          <div class="card-footer padin" >
+            <ul class="users pull-left">
+            <li><a href="#" data-toggle="tooltip" data-placement="top" data-original-title="<%=article.user.name%>"><%=link_to image_tag(article.user.image.url(:thumb)),profile_path(article.user.id)%></a></li>
+            <li style="font-size:13px"><%= link_to article.user.name,profile_path(article.user.id),class: "bs bl"%></li>
+            </ul>
+            
+          </div>
+        </div><!--.card-->
+      </div><!--.col-md-6-->
+      <%end%>
+</div>
+</div><!--.content-->
+<%else%>
+<div class="header">
+    <div class="container">
+
+      <div class="logo">
+        <img src="/assets/logo.jpg" alt="Pleasure">
+      </div><!--.logo-->
+
+      <!--
+      * data-nav-link attribute is necessary for data-anchor links.
+      * data-anchor="slide1" attribute is useful when user clicks the data-nav-link, the window moves the related slide.
+      -->
+      <div class="animated-selector">
+        <ul class="navigation">
+          <li data-anchor="slide1" data-nav-link>FEATURES</li>
+          <li data-anchor="slide2" data-nav-link>PLANS</li>
+          <li data-anchor="slide3" data-nav-link>OVERVIEW</li>
+          <li data-anchor="slide4" data-nav-link>BLOGGERS</li>
+          <li data-anchor="slide5" data-nav-link>CONTACT</li>
+        </ul>
+        <div class="selector"></div>
+      </div><!--.animated-selector-->
+
+      <div class="btn-action">
+        
+        <a   data-toggle="modal" data-target="#log_in" class="btn btn-indigo">SIGN IN</a>
+      </div><!--.btn-action-->
+
+      <div class="hamburger-btn"></div><!--.hamburger-btn-->
+
+    </div><!--.container-->
+  </div><!--.header-->
+
+  <!--
+  * Each slide divs can be combined with these classes
+
+  ** Material colors: such as bg-pink, bg-indigo, bg-teal etc.
+  ** bg-image: you just need to write inline css style in order to path to image.
+  ** bg-image-with-shadow: same for bg-image class but in this time background-gradient floats the image.
+  ** bg-pattern: same for the bg-image but in this time the pattern will be repeated for background.
+
+  * data-nav="remove" attribute hides the active navigation border when this slide in viewport.
+  -->
+  <div class="slide bg-image" data-nav="remove" style="background-image: url('/assets/header.jpg');background-attachment:fixed; height:550px">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <h1 class="text-indigo text-light-shadow">GET THE MOST <span data-typer-targets="UNIQUE, ADVANCED, ESSENTIAL">ADVANCED</span><br>THEME WITH PLEASURE.</h1>
+          <p class="caption text-light-shadow">Directory of top blogs in India </p>
+        </div><!--.col-->
+      </div><!--.row-->
+
+      <!-- <div class="row">
+        <div class="col-md-12">
+          <ul class="store-list">
+            <li><a href="javascript:;"><img src="../../assets/on-appstore.png" alt=""></a></li>
+            <li><a href="javascript:;"><img src="../../assets/on-googleplay.png" alt=""></a></li>
+          </ul>
+        </div><
+      </div><!--.row-->
+
+    </div><!--.container-->
+    <a class="btn btn-large btn-floating btn-indigo btn-next btn-next-center" data-anchor="slide1" data-nav-link><i class="ion-chevron-down"></i></a>
+
+  </div><!--.slide-hero-->
+
+  <!--
+  * data-nav="slide1" attribute is an identifier for data-nav-links.
+  -->
+  <div class="slide" data-nav="slide1">
+
+    <div class="container">
+
+      <div class="slide-image-horizontal hide-on-mobile" data-bottom-top="left:-200px" data-center="left:50px"><img src="../../assets/61.jpg" alt=""></div><!--.slide-image-->
+
+      <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+          <h2 class="text-black">FEATURES</h2>
+          <p class="caption">Collaboratively administrate empowered markets via plug-and-play networks.</p>
+          <ul class="list-vertical">
+            <li>
+              <div class="list-icon text-indigo">
+                <i class="ion-tshirt-outline"></i>
+              </div><!--.list-icon-->
+              <div class="list-info">
+                <h4 class="text-indigo">Responsive</h4>
+                <span>Dynamically procrastinate B2C users after installed base benefits.</span>
+              </div><!--.list-info-->
+            </li>
+            <li>
+              <div class="list-icon text-green">
+                <i class="ion-earth"></i>
+              </div><!--.list-icon-->
+              <div class="list-info">
+                <h4 class="text-green">Colourful</h4>
+                <span>Dramatically visualize customer directed convergence without revolutionary ROI.</span>
+              </div><!--.list-info-->
+            </li>
+            <li>
+              <div class="list-icon text-red">
+                <i class="ion-bag"></i>
+              </div><!--.list-icon-->
+              <div class="list-info">
+                <h4 class="text-red">Functional</h4>
+                <span>Efficiently unleash cross-media information without cross-media value.</span>
+              </div><!--.list-info-->
+            </li>
+          </ul>
+        </div><!--.col-->
+      </div><!--.row-->
+
+      <a class="btn btn-large btn-floating btn-pink btn-next btn-next-left" data-anchor="slide2" data-nav-link><i class="ion-chevron-down"></i></a>
+
+    </div><!--.container-->
+
+  </div><!--.slide-->
+
+  <div class="slide bg-light-grey" data-nav="slide2">
+
+    <div class="container">
+
+      <div class="slide-image-vertical hide-on-mobile" data-bottom-top="top:-200px" data-center-bottom="top:100px"><img src="../../assets/62.jpg" alt=""></div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="text-black">PLANS</h2>
+          <p class="caption">Quickly maximize timely deliverables for real-time schemas.</p>
+          <ul class="list-vertical">
+            <li>
+              <div class="list-icon text-deep-purple">
+                <i class="ion-images"></i>
+              </div>
+              <div class="list-info">
+                <h4 class="text-deep-purple">New Layouts</h4>
+                <span>Completely synergize resource sucking relationships via premier niche markets.</span>
+              </div>
+            </li>
+            <li>
+              <div class="list-icon text-teal">
+                <i class="ion-calendar"></i>
+              </div>
+              <div class="list-info">
+                <h4 class="text-teal">AngularJS</h4>
+                <span>Dramatically maintain clicks-and-mortar solutions without functional solutions.</span>
+              </div>
+            </li>
+            <li>
+              <div class="list-icon text-amber">
+                <i class="ion-happy-outline"></i>
+              </div>
+              <div class="list-info">
+                <h4 class="text-amber">Material Phonegap</h4>
+                <span>Professionally cultivate one-to-one customer service with robust ideas. </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <a class="btn btn-large btn-floating btn-amber btn-next btn-next-right" data-anchor="slide3" data-nav-link><i class="ion-chevron-down"></i></a>
+
+    </div>
+  </div>
+
+  <div class="slide bg-image-with-shadow" style="background-image: url('../../assets/bg-overview.jpg'); " data-nav="slide3">
+    <div class="container">
+      <h3 class="text-white text-center">OVERVIEW</h3>
+      <p class="caption text-white text-center">Dynamically innovate resource-leveling customer service for state of the art customer service.</p>
+
+      <ul class="row list-horizontal white">
+        <li class="col-sm-4" data-bottom-top="top:-50px" data-center="top:0px">
+          <div class="list-icon">
+            <i class="ion-radio-waves"></i>
+          </div><!--.list-icon-->
+          <div class="list-info">
+            <h4>GITHUB SUPPORT</h4>
+            <span>Collaboratively administrate empowered markets via plug-and-play networks.</span>
+          </div><!--.list-info-->
+        </li>
+        <li class="col-sm-4" data-bottom-top="top:-50px" data-center="top:0px">
+          <div class="list-icon">
+            <i class="ion-search"></i>
+          </div><!--.list-icon-->
+          <div class="list-info">
+            <h4>KEEP UPDATED</h4>
+            <span>Dynamically procrastinate B2C users after installed base benefits.</span>
+          </div><!--.list-info-->
+        </li>
+        <li class="col-sm-4" data-bottom-top="top:-50px" data-center="top:0px">
+          <div class="list-icon">
+            <i class="ion-map"></i>
+          </div><!--.list-icon-->
+          <div class="list-info">
+            <h4>CUSTOMER SUPPORT</h4>
+            <span>Dramatically visualize customer directed convergence without revolutionary ROI.</span>
+          </div><!--.list-info-->
+        </li>
+      </ul>
+
+      <a class="btn btn-large btn-floating btn-teal btn-next btn-next-center" data-anchor="slide4" data-nav-link><i class="ion-chevron-down"></i></a>
+
+    </div><!--.container-->
+  </div><!--.slide-->
+
+  <div class="slide bg-pattern" style="background-image: url('../../assets/sativa.png');" data-nav="slide4">
+    <div class="container">
+      <h3 class="text-black text-center">BLOGGERS</h3>
+      <p class="caption text-center">Our company is located in Istanbul, Turkey and London, England.</p>
+
+      <div class="row transform-bug">
+      <%@users.each do |user|%>
+        <div class="col-md-3 col-sm-4 col-xs-12" data-bottom-top="bottom:-100px" data-center="bottom:0px">
+          <div class="card card-user-new">
+            <%=image_tag user.image.url(:medium) ,class: "member-image"%>
+            <div class="card-body">
+              <h5><%=user.name%></h5>
+              <h6>Web Developer</h6>
+              <ul class="social-links list-inline">
+                <li><a href="#"><i class="fa fa-github"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              </ul>
+            </div><!--.card-body-->
+          </div><!--.card-->
+        </div><!--.col-md-3-->
+         <%end%>
+        
+
+      </div><!--.row-->
+
+    </div><!--.container-->
+
+  </div><!--.slide-->
+
+  <div class="slide" data-nav="slide5">
+
+    <div class="container">
+      <h3 class="text-black text-center">CONTACT</h3>
+      <p class="caption text-center">We will be glad if you write us.</p>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <div class="form-group">
+            <div class="inputer inputer-teal floating-label">
+              <div class="input-wrapper">
+                <input type="text" name="" class="form-control">
+                <label>First name</label>
+              </div><!--.input-wrapper-->
+            </div><!--.inputer-->
+          </div><!--.form-group-->
+        </div><!--.col-->
+        <div class="col-md-6 col-xs-12">
+          <div class="form-group">
+            <div class="inputer inputer-teal floating-label">
+              <div class="input-wrapper">
+                <input type="text" name="" class="form-control">
+                <label>Last name</label>
+              </div><!--.input-wrapper-->
+            </div><!--.inputer-->
+          </div><!--.form-group-->
+        </div><!--.col-->
+      </div><!--.row-->
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="inputer inputer-teal floating-label">
+              <div class="input-wrapper">
+                <textarea class="form-control js-auto-size" rows="1"></textarea>
+                <label>Your message</label>
+              </div>
+            </div>
+          </div><!--.form-group-->
+        </div><!--.col-->
+      </div><!--.row-->
+
+      <div class="row">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-teal pull-right">SEND</button>
+        </div><!--.col-->
+      </div><!--.row-->
+
+    </div><!--.container-->
+
+  </div><!--.slide-->
+
+  <div class="footer bg-black zero">
+    <div class="container">
+
+      <ul class="social-list">
+        <li><a href="javascript:;" class="facebook"><i class="ion-social-facebook"></i></a></li>
+        <li><a href="javascript:;" class="twitter"><i class="ion-social-twitter"></i></a></li>
+        <li><a href="javascript:;" class="pinterest"><i class="ion-social-github"></i></a></li>
+      </ul>
+
+      <div class="copyright v-text">TEAMFOX &copy; 2015</div>
+
+    </div><!--.container-->
+  </div><!--.footer-->
+<%end%>
+  
+    
+
+    
+
+         
+
+         
+
+        
+
+    
+
+  
+  
+    
+  

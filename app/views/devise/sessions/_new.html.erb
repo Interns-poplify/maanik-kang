@@ -1,0 +1,51 @@
+<div class="modal  fade" id="log_in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content compact">
+      <div class="modal-header m-head">
+        <button type="button" class="close m-button"  data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="text-center"><h4 class="modal-title" id="myModalLabel" style="color:white;">WELCOME</h4></div>
+      </div>
+      <div class="modal-body">
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  
+    
+    <div class="row">
+    <div class="col-md-12 col-xs-12"><%= f.email_field :email, autofocus: true,placeholder:"email@address.com",:required => true ,class: "forms" %></div>
+  </div>
+
+ 
+    <div class="row">
+    <div class="col-md-12 col-xs-12">
+    <%= f.password_field :password, autocomplete: "off",placeholder:"password",:required => true ,class: "forms"  %>
+    </div>
+    </div>
+  <% if devise_mapping.rememberable? -%>
+     <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <%= f.check_box :remember_me%>
+      <%= f.label :remember_me ,class: "fsize" %>
+   
+  <% end%></div>
+  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <div class="col-md-6 col-xs-6 text-right ">
+  <%= link_to "Forgot Password?", new_password_path(resource_name),class: "fsize" %><br />
+<% end %></div>
+
+   </div>
+ <div class="row">
+    <div class="col-md-12 col-xs-12">
+ <%= f.submit "LOG IN" ,class: "btn btn-indigo" %>
+ </div>
+ </div>
+</div>
+<div class="modal-footer">
+  <div class="text-center"><p style="color:grey;margin-bottom:5px">Don't have an account yet?</p>
+</div>
+   <div class="text-center"><%= link_to "SIGN UP",  new_user_registration_path,class: "btn btn-indigo"%></div>
+  </div>
+<% end %>
+
+
+</div>
+</div>
+</div>

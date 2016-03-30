@@ -1,0 +1,21 @@
+
+<div class="comment">
+							<div class="user-photo"><%=image_tag comment.user.image.url(:thumb)%></div>
+							<div class="comment-body">
+								<div class="user">
+									<ul class="inline-list dot-seperator">
+										<li><a href="#"><%=comment.user.name%></a></li>
+										<li class="small"><%=time_ago_in_words(comment.created_at) %>ago</li>
+									</ul>
+								</div>
+								
+								<p class="fzs"><%=comment.body%></p>
+                                </div>
+								<div class="comment-footer">
+									<ul class="inline-list dot-seperator">
+										<li class="small">Edit</li>
+										<li class="small">Reply</li>
+										<li class="small">Share</li>
+									</ul>
+								</div><!--.comment-footer-->
+	</div>							

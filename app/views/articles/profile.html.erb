@@ -1,0 +1,196 @@
+	
+
+	<div class="content">
+
+		<div class="page-header full-content parallax" style="height: 600px; overflow: hidden">
+			<div  style="background: url('/assets/picjumbo/large/24.jpg') 50% 50%; background-size: cover; width: 100%; height: 100%; position: absolute; left: 0; top: 0;">
+			</div>
+
+			<div class="profile-info">
+				<div class="profile-photo">
+					<%=image_tag @user.image.url(:thumb)%>
+				</div><!--.profile-photo-->
+				<div class="profile-text light">
+					<%=@user.name%>
+					<span class="caption">Web Developer</span>
+				</div><!--.profile-text-->
+			</div><!--.profile-info-->
+
+			<div class="row">
+				<div class="col-sm-6">
+					<h1>User Profile <small><%=@user.name%></small></h1>
+				</div><!--.col-->
+				
+			</div><!--.row-->
+
+			<div class="header-tabs scrollable-tabs sticky">
+				<ul class="nav nav-tabs tabs-active-text-white tabs-active-border-yellow">
+					<li class="active"><a href="#timeline" data-toggle="tab" class="btn-ripple">Timeline</a></li>
+					<li><a href="#about" data-toggle="tab" class="btn-ripple">About</a></li>
+					
+				</ul>
+			</div>
+
+		</div><!--.page-header-->
+
+		<div class="row user-profile">
+			<div class="col-md-12">
+				<div class="tab-content without-border">
+					<div id="timeline" class="tab-pane active">
+
+						<div class="row masonry">
+                             <%@user.articles.each do |ar|%>
+							<div class="col-md-4 col-xs-12 col-sm-6">
+								<div class="card tile card-post">
+									<div class="card-heading">
+										<%=image_tag @user.image.url(:thumb),class: "user-image"%> 
+										<p class="author"><a href="#"><%@user.name%></a> wrote an article.</p>
+										<p class="time"><%=ar.created_at.strftime("%d %b. %Y")%></p>
+									</div><!--.card-heading-->
+									<div class="card-body">
+									 <div class="card-heading bg-image hgt" style="background-image:url(<%= ar.photo.url(:medium)%>); background-position: center;background-repeat: no-repeat;background-size: cover;">
+                                         </div>
+									<div class="marginss"><h5 style="margin-bottom:0px"><%= link_to ar.title,article_path(ar)%></h5></div>
+										<div><%=(ar.body).truncate(200)%><%=link_to "read more",article_path(ar)%></div>
+										
+									</div><!--.card-body-->
+									<div class="card-footer">
+										
+										<ul class="card-comments">
+										<%ar.comments.take(2).each do |cm|%>
+											<li>
+												<div class="user-photo"><%=image_tag cm.user.image.url(:thumb)%></div>
+												<div class="comment"><%= link_to cm.user.name,profile_path(cm.user)%> <%=cm.body%></div>
+											</li>
+										<%end%>	
+										</ul>
+										
+									</div><!--.card-footer-->
+								</div><!--.card-->
+							</div><!--.col-md-4-->
+                                <%end%>
+							
+
+							
+
+							
+
+							
+							
+						</div><!--.row-->
+
+					</div><!--#timeline.tab-pane-->
+
+					<div id="about" class="tab-pane">
+						<div class="row">
+							<div class="col-md-3">
+								<ul class="nav nav-tabs borderless vertical">
+									<li class="active"><a href="#about_overview" data-toggle="tab">Overview</a></li>
+									<li><a href="#about_timeline" data-toggle="tab">Timeline</a></li>
+								</ul>
+							</div><!--.col-md-3-->
+							<div class="col-md-9">
+								<div class="tab-content">
+
+									<div class="tab-pane active" id="about_overview">
+										<div class="legend">Contact Information</div>
+										<div class="row">
+											<div class="col-md-3">Mobile Phones</div><!--.col-md-3-->
+											<div class="col-md-9">+1-202-555-0173</div><!--.col-md-9-->
+										</div><!--.row-->
+										<div class="row">
+											<div class="col-md-3">Address</div><!--.col-md-3-->
+											<div class="col-md-9">2002 Holcombe Boulevard<br>Houston, TX 77030 </div><!--.col-md-9-->
+										</div><!--.row-->
+										<div class="row">
+											<div class="col-md-3">Website</div><!--.col-md-3-->
+											<div class="col-md-9">http://www.teamfox.co</div><!--.col-md-9-->
+										</div><!--.row-->
+										<div class="row">
+											<div class="col-md-3">Email</div><!--.col-md-3-->
+											<div class="col-md-9"><%=@user.email%></div><!--.col-md-9-->
+										</div><!--.row-->
+										<div class="row">
+											<div class="col-md-3">Facebook</div><!--.col-md-3-->
+											<div class="col-md-9">fb.com/teamfoxco</div><!--.col-md-9-->
+										</div><!--.row-->
+										<div class="row">
+											<div class="col-md-3">Twitter</div><!--.col-md-3-->
+											<div class="col-md-9">twitter.com/teamfox</div><!--.col-md-9-->
+										</div><!--.row-->
+
+										<div class="legend">Basic Information</div>
+										<div class="row">
+											<div class="col-md-3">Birth Date</div><!--.col-md-3-->
+											<div class="col-md-9">July 17</div><!--.col-md-9-->
+										</div><!--.row-->
+										<div class="row">
+											<div class="col-md-3">Birth Year</div><!--.col-md-3-->
+											<div class="col-md-9">2014</div><!--.col-md-9-->
+										</div><!--.row-->
+										<div class="row">
+											<div class="col-md-3">Gender</div><!--.col-md-3-->
+											<div class="col-md-9">Male</div><!--.col-md-9-->
+										</div><!--.row-->
+									</div><!--#about_overview.tab-pane-->
+
+									<div class="tab-pane" id="about_timeline">
+										<div class="timeline single">
+											<div class="frame">
+												<div class="timeline-badge">
+													<i class="fa fa-headphones"></i>
+												</div><!--.timeline-badge-->
+												<span class="timeline-date">17 August 1999</span>
+												<div class="timeline-content">
+													<p>The 1999 Kocaeli earthquake occurred with a moment magnitude of 7.4 that struck northwestern Turkey on 17 August at about 3:02 a.m. local time.</p>
+												</div><!--.timeline-content-->
+											</div><!--.frame-->
+											<div class="frame">
+												<div class="timeline-badge">
+													<i class="fa fa-tree"></i>
+												</div><!--.timeline-badge-->
+												<span class="timeline-date">December 28, 1908</span>
+												<div class="timeline-content">
+													The 1908 Messina earthquake and tsunami took about 123,000 lives on December 28, 1908, in Sicily and Calabria, southern Italy.
+												</div><!--.timeline-content-->
+											</div><!--.frame-->
+
+											<div class="frame">
+												<div class="timeline-badge">
+													<i class="fa fa-tree"></i>
+												</div><!--.timeline-badge-->
+												<span class="timeline-date">18 April 1906</span>
+												<div class="timeline-content">
+													The San Francisco earthquake of 1906 struck San Francisco and the coast of Northern California at 5:12 a.m. on Wednesday, April 18, 1906.
+												</div><!--.timeline-content-->
+											</div><!--.frame-->
+
+											<div class="frame">
+												<div class="timeline-badge">
+													<i class="fa fa-tree"></i>
+												</div><!--.timeline-badge-->
+												<span class="timeline-date">May, 526</span>
+												<div class="timeline-content">
+													The 526 Antioch earthquake hit Syria (region) and Antioch in the Byzantine Empire in 526. It struck during late May, probably between May 20–29, at mid-morning, killing approximately 250,000 people.
+												</div><!--.timeline-content-->
+											</div><!--.frame-->
+										</div><!--.timeline-->
+
+									</div><!--#about_timeline.tab-pane-->
+
+								</div><!--.tab-content-->
+
+							</div><!--.col-md-9-->
+						</div><!--.row-->
+					</div><!--#about.tab-pane-->
+
+					
+
+
+
+
+
+	</div><!--.layer-container-->
+	</div>
+	</div>
+	</div>

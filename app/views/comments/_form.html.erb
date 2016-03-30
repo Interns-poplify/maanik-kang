@@ -1,0 +1,24 @@
+
+
+<%= form_for [ @article, @comment ] do |f| %>
+  
+  
+
+<div class="comment comment-box">
+							<div class="user-photo"><%=image_tag current_user.image.url(:thumb)%></div>
+							<div class="comment-body">
+
+								<div class="input-group">
+									<div class="inputer">
+										<div class="input-wrapper">
+											<%= f.text_area :body, rows: "1", class: "form-control js-auto-size", placeholder: "Join the discussion" %>
+										</div>
+									</div><!--.inputer-->
+									<span class="input-group-btn">
+										<%= f.submit 'SEND' ,class:"btn btn-primary"%>
+									</span>
+								</div><!--.input-group-->
+
+							</div><!--.comment-body-->
+						</div><!--.comment-->
+						<% end %>

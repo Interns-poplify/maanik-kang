@@ -1,0 +1,29 @@
+<div class="content">
+<div class="row">
+<%@tag.articles.each do |article|%>
+      <div class="col-md-4">
+        <div class="card card-event">
+          <div class="card-heading bg-image" style="background-image:url(<%= article.photo.url(:medium)%>); background-position: center;background-repeat: no-repeat;background-size: cover;">
+          </div><!--.card-heading-->
+
+          <div class="card-body">
+            <div class="calendar calenderb clen">
+              <div class="month monthb"><%=article.created_at.strftime("%B")%></div>
+              <div class="date dateb dlen"><%=article.created_at.strftime("%d")%></div>
+            </div><!--.calendar-->
+            <%= link_to article.title,article_path(article),class: "bl bs sb"%>
+            <p style="font-size:15px"><%=(article.body).truncate(150)%><%=link_to "read more",article_path(article)%></p>
+          </div><!--.card-body-->
+
+          <div class="card-footer padin" >
+            <ul class="users pull-left">
+            <li><a href="#" data-toggle="tooltip" data-placement="top" data-original-title="<%=article.user.name%>"><%=link_to image_tag(article.user.image.url(:thumb)),profile_path(article.user.id)%></a></li>
+            <li style="font-size:13px"><%= link_to article.user.name,profile_path(article.user.id),class: "bs bl"%></li>
+            </ul>
+            
+          </div>
+        </div><!--.card-->
+      </div><!--.col-md-6-->
+      <%end%>
+</div>
+</div><!--.content-->

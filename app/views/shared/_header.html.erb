@@ -1,0 +1,282 @@
+<div class="nav-bar-container">
+
+    <!-- BEGIN ICONS -->
+    <div class="nav-menu">
+      <div class="hamburger">
+        <span class="patty"></span>
+        <span class="patty"></span>
+        <span class="patty"></span>
+        <span class="patty"></span>
+        <span class="patty"></span>
+        <span class="patty"></span>
+      </div><!--.hamburger-->
+    </div><!--.nav-menu-->
+
+    <div class="nav-search">
+      <span class="search"></span>
+    </div><!--.nav-search-->
+
+
+    <div class="nav-user">
+    <%if user_signed_in?%>
+      <div class="user">
+        <%=image_tag current_user.image.url(:thumb)%>
+        
+        
+      </div><!--.user-->
+      <%end%>
+      <div class="cross">
+        <span class="line"></span>
+        <span class="line"></span>
+      </div><!--.cross-->
+    </div><!--.nav-user-->
+    <!-- END OF ICONS -->
+
+    <div class="nav-bar-border"></div><!--.nav-bar-border-->
+
+    <!-- BEGIN OVERLAY HELPERS -->
+    <div class="overlay">
+      <div class="starting-point">
+        <span></span>
+      </div><!--.starting-point-->
+      <div class="logo">PLEASURE</div><!--.logo-->
+    </div><!--.overlay-->
+
+    <div class="overlay-secondary"></div><!--.overlay-secondary-->
+    <!-- END OF OVERLAY HELPERS -->
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div><!--.nav-bar-container-->
+  <div class="content">
+ <div class="page-header full-content">
+      <div class="row">
+        <div class="  col-md-6 col-xs-12 col-sm-6">
+         <div class="brand"> <%= link_to 'BRAND' ,root_path ,class: "bl"%></div>
+        </div><!--.col-->
+        <div class=" col-md-6 col-xs-12  col-sm-6 text-right "
+          >
+          <div >
+          
+            <ol class="breadcrumb">
+            <li><a href="/articles"><i class="ion-home"></i> Homepage</a></li>
+            
+            <%if user_signed_in?%>
+            <li><%= link_to "SIGN OUT", destroy_user_session_path(), :method => :delete %></li>
+            <%else%>
+            <li><a   data-toggle="modal" data-target="#log_in">SIGN IN</a></li>
+             <%end%>
+             </ol>
+          </div>
+        </div><!--.col-->
+      </div><!--.row-->
+    </div><!--.page-header-->
+</div>
+<div class="layer-container">
+
+    <!-- BEGIN MENU LAYER -->
+    <div class="menu-layer">
+      <ul>
+      <li><%=link_to "HOME",root_path%></li>
+      <%if user_signed_in?%>
+        <li data-open-after="true">
+          <%=link_to "New Article",new_article_path%>
+        </li>
+        <%end%>
+        </ul>
+        <li>
+          
+    </div><!--.menu-layer-->
+     <div class="search-layer">
+      <div class="search">
+        
+          <div class="form-group">
+           
+            <%= form_tag(search_path, :method => "get", remote: true,class: "navbar-form", id: "search-form") do %>
+            <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "type something" ,id: "clear" %>
+              <!-- <button class=" btn btn-default disabled" type="submit"><i class="ion-search"></i></button> -->
+            <%= button_tag( type: 'submit',:class => "btn btn-default noshad ") do %>
+                    <i class="ion-search"></i>
+             <% end %>
+            <% end %>
+          </div>
+       
+      </div><!--.search-->
+
+      <div class="results">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="result result-users ">
+             <ul>
+             <li id="datasearch"></li>
+              </ul>
+                </div>
+               </div> 
+        </div><!--.row-->
+      </div><!--.results-->
+    </div><!--.search-layer-->
+    <!-- END OF SEARCH LAYER -->
+    <!--userlayer-->
+   
+     <div class="user-layer">
+      <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li class="active"><a href="#messages" data-toggle="tab">MY ARTICLES</a></li>
+        <li><a href="#notifications" data-toggle="tab">EDIT MY PROFILE </li>
+        
+      </ul>
+
+      <div class="row no-gutters tab-content">
+         
+       <div class="tab-pane fade in active scrol" id="messages" >
+          
+            
+               <div class="content">
+                 <div class="row" style="margin:0px;margin-top: 25px;margin-bottom: 25px;">
+                 <%if user_signed_in?%>
+                <%current_user.articles.each do |article|%>
+              <div class="col-md-4 col-xs-12 col-sm-6 spc">
+        <div class="card card-event">
+          <div class="card-heading bg-image" style="background-image:url(<%= article.photo.url(:medium)%>); background-position: center;background-repeat: no-repeat;background-size: cover;">
+          </div><!--.card-heading-->
+
+          <div class="card-body">
+            <div class="calendar calenderb">
+              <div class="month monthb"><%=article.created_at.strftime("%B")%></div>
+              <div class="date dateb"><%=article.created_at.strftime("%d")%></div>
+            </div><!--.calendar-->
+            <%= link_to article.title,article_path(article),class: "bl bs sb"%>
+            <p style="font-size:15px"><%=(article.body).truncate(150)%><%=link_to "read more",article_path(article)%></p>
+          </div><!--.card-body-->
+
+          <div class="card-footer padin" >
+            <ul class="users pull-left">
+            <li><%= link_to(
+             content_tag(
+                    :i,
+                    nil,
+                   class: 'fa fa-pencil ind',
+           
+                    ),
+
+               edit_article_path(article.id),
+               # class: "btn btn-setd"
+            ) %></li></ul>
+           <ul class="users pull-right"> <li> <%= link_to(
+      content_tag(
+        :i,
+        nil, 
+        class: 'fa fa-trash ind '
+      ), 
+      [article],
+      method: :delete, 
+      data: { 
+        confirm: 'Are you sure?' 
+      },
+      # class: "btn btn-set"
+      
+    ) %></li></ul>
+            
+            
+          </div>
+        </div><!--.card-->
+      </div><!--.col-md-4-->
+      <%end%>
+      <%end%>
+        </div>
+        </div>
+          
+
+         
+        </div><!--.tab-pane #messages-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+        
+
+
+
+
+
+
+
+
+
+
+
+        <div class="tab-pane fade" id="notifications">
+
+          <div>
+            <%= render 'devise/registrations/edit'%>
+          </div>
+        </div><!--.tab-pane #notifications-->
+          
+       
+
+      </div><!--.row-->
+    </div><!--.user-layer-->
+    <!-- END OF USER LAYER -->
+   
+    </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#clear").keyup(function(){
+      var h=$("#clear").val();
+      if($("#clear").val() == ''){
+       
+    // alert("dd");
+    $("#datasearch").html("");
+  }
+  else {
+   var as = $("#clear").val();
+   $.ajax({
+    type: "GET",
+    url: "/search",
+    data: {search: as}
+   })
+ }
+ // if($("#clear").val().length == 3)
+   // if($("#clear").text() == ''){
+    // alert("dd");
+    // $("#datasearch").html("n");
+   
+   })
+  })
+  
+</script>
+ 

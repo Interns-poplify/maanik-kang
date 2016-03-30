@@ -1,0 +1,9 @@
+<%if @articless.blank?%>
+<div class="white">no result found</div>
+<%else%>
+<%@articless.each do |article|%>
+<div class="white"> 
+	<%=link_to article.title ,article_path(article.id)%>
+</div>
+<%end%>
+<%end%>
